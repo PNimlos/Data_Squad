@@ -3,10 +3,7 @@
 library(stats)
 library(ade4)
 library(ape)
-library(adegenet)
-library(phangorn)
 library(evemodel)
-library(edgeR)
 library(ggpubr)
 
 ##### tree #####
@@ -16,13 +13,12 @@ plot(speciesTree) #load in and verify tree branches
 
 
 ##### expression matrices for all samples and Mt. Evans strain only (high altitude) #####
-allStrains_exprMat <- read.csv("Hisat_norm_counts_allStrains_111022.csv")
+allStrains_exprMat <- read.csv("Hisat_norm_counts_111422.csv")
 rownames(allStrains_exprMat) <- allStrains_exprMat$X
 allStrains_exprMat$X <- NULL 
-ME_exprMat <- read.csv("ME_Hisat_normcounts_1000_111022.csv")
+ME_exprMat <- read.csv("ME_Hisat_normcounts_1000_111422.csv")
 rownames(ME_exprMat) <- ME_exprMat$X
-ME_exprMat$X <- NULL 
-ME_exprMat$X.1 <- NULL#remove X column, leaving only individuals
+ME_exprMat$X <- NULL #remove X column, leaving only individuals
 ME_exprMat <- na.omit(ME_exprMat)
 #ME_exprMat <- as.matrix(ME_exprMat) troubleshooting convert to matrix
 #ME_exprMat <- as.data.frame(ME_exprMat) troubleshooting convert to matrix
@@ -34,7 +30,7 @@ colnames(allStrains_exprMat)
 id <- colnames(allStrains_exprMat)
 indiv <- read.csv("acclim_data_all.csv") #dataset contains all individual names and experimental information
 indiv <- indiv[order(indiv$Mouse_ID),]
-all <- indiv[indiv$Mouse_ID %in% id,] #experimental data for all sequenced individuals 
+all <- indiv[indiv$Mouse_ID %in% id,] #experimental data for just sequenced individuals 
 
 
 
